@@ -29,5 +29,4 @@ replace (
 	github.com/jaggerwoo/go-gin-blog/models => ./models
 	github.com/jaggerwoo/go-gin-blog/pkg/setting => ./pkg/setting
 	github.com/jaggerwoo/go-gin-blog/routers => ./routers
-	github.com/jaggerwoo/go-gin-blog/routers/api/v1 => ./routers/api/v1
 )
