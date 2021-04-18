@@ -44,6 +44,7 @@ func init() {
 
     if err != nil {
         log.Println(err)
+        // panic("failed to connect database")
     }
 
     gorm.DefaultTableNameHandler = func (db *gorm.DB, defaultTableName string) string  {
