@@ -1,8 +1,13 @@
 package routers
 
 import (
+	"net/http"
 	"github.com/gin-gonic/gin"
-	"github.com/jaggerwoo/go-gin-blog/pkg/setting"
+	"github.com/unknwon/com"
+	"go-gin-blog/pkg/setting"
+	"go-gin-blog/pkg/e"
+    "go-gin-blog/models"
+    "go-gin-blog/pkg/util"
 )
 
 func InitRouter() *gin.Engine {
@@ -28,6 +33,26 @@ func InitRouter() *gin.Engine {
 
 //获取多个文章标签
 func GetTags(c *gin.Context) {
+	name := c.Query("name")
+	maps := make(map[string]interface{})
+    data := make(map[string]interface{})
+	if name != "" {
+        maps["name"] = name
+    }
+	var state int = -1
+    if arg := c.Query("state"); arg != "" {
+        state = com.StrTo(arg).MustInt()
+        maps["state"] = state
+    }
+	code := e.SUCCESS
+
+    data["lists"] = models.GetTags(util.GetPage(c), setting.PageSize, maps)
+    data["total"] = models.GetTagTotal(maps)
+	c.JSON(http.StatusOK, gin.H{
+        "code" : code,
+        "msg" : e.GetMsg(code),
+        "data" : data,
+    })
 }
 
 //新增文章标签

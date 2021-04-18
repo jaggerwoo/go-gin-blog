@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"github.com/jaggerwoo/go-gin-blog/pkg/setting"
-	"github.com/jaggerwoo/go-gin-blog/routers"
+	"go-gin-blog/pkg/setting"
+	"go-gin-blog/routers"
 )
 
 func main() {
@@ -18,4 +18,6 @@ func main() {
         MaxHeaderBytes: 1 << 20,
     }
 	s.ListenAndServe()
+	fmt.Sprintf(":%d", setting.HTTPPort)
+	fmt.Println("sssss")
 }
