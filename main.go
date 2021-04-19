@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"net/http"
 	"go-gin-blog/pkg/setting"
-	"go-gin-blog/routers"
+	"go-gin-blog/router"
 )
 
 func main() {
-	router := routers.InitRouter()
+	router := router.InitRouter()
 
 	s := &http.Server{
         Addr:           fmt.Sprintf(":%d", setting.HTTPPort),
