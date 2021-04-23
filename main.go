@@ -1,23 +1,30 @@
 package main
 
 import (
-	"fmt"
-	"net/http"
-	"go-gin-blog/pkg/setting"
-	"go-gin-blog/router"
+    "fmt"
+    "net/http"
+
+    "go-gin-blog/router"
+    "go-gin-blog/models"
+    "go-gin-blog/pkg/setting"
+    "go-gin-blog/pkg/logging"
 )
 
 func main() {
-	router := router.InitRouter()
+    setting.Setup()
+    models.Setup()
+    logging.Setup()
 
-	s := &http.Server{
-        Addr:           fmt.Sprintf(":%d", setting.HTTPPort),
+    router := router.InitRouter()
+
+    s := &http.Server{
+        Addr:           fmt.Sprintf(":%d", setting.ServerSetting.HttpPort),
         Handler:        router,
-        ReadTimeout:    setting.ReadTimeout,
-        WriteTimeout:   setting.WriteTimeout,
+        ReadTimeout:    setting.ServerSetting.ReadTimeout,
+        WriteTimeout:   setting.ServerSetting.WriteTimeout,
         MaxHeaderBytes: 1 << 20,
     }
-	s.ListenAndServe()
-	fmt.Sprintf(":%d", setting.HTTPPort)
-	fmt.Println("sssss")
+    s.ListenAndServe()
+    fmt.Sprintf(":%d", setting.ServerSetting.HttpPort)
+    fmt.Println("sssss")
 }

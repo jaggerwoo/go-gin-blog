@@ -14,8 +14,8 @@ var (
     DefaultPrefix = ""
     DefaultCallerDepth = 2
     logger *log.Logger
-	logPrefix = ""
-	levelFlags = []string{"DEBUG", "INFO", "WARN", "ERROR", "FATAL"}
+    logPrefix = ""
+    levelFlags = []string{"DEBUG", "INFO", "WARN", "ERROR", "FATAL"}
 )
 
 const (
@@ -26,7 +26,7 @@ const (
     FATAL
 )
 
-func init() {
+func Setup() {
     filePath := getLogFileFullPath()
     F = openLogFile(filePath)
 
